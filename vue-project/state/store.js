@@ -1,7 +1,6 @@
 import { createApp } from 'vue'
-import { createStore } from 'vuex'
+import {createStore} from "vuex";
 
-export type State = typeof state
 
 // Create a new store instance.
 const store = createStore({
@@ -11,7 +10,7 @@ const store = createStore({
         }
     },
     mutations: {
-        increment (state: State, count: number) {
+        increment (state) {
             state.count++
         }
     }
