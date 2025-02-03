@@ -1,18 +1,13 @@
-import { createApp } from 'vue'
 import {createStore} from "vuex";
+import users from "./modules/users.js";
+import moduleUsers from "./modules/users.js";
+import moduleInventory from "./modules/inventory.js";
 
 
-// Create a new store instance.
 const store = createStore({
-    state () {
-        return {
-            count: 0
-        }
-    },
-    mutations: {
-        increment (state) {
-            state.count++
-        }
+    modules: {
+        user: moduleUsers,
+        inventory: moduleInventory,
     }
 })
 

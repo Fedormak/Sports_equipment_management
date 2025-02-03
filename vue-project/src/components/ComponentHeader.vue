@@ -6,16 +6,18 @@
     <nav class="header-page">
       <RouterLink to="/">Главная</RouterLink>
       <RouterLink to="/about">Склад</RouterLink>
-      <RouterLink to="/adminPan" v-if="isLoggedIn && hasAccess">Заказ</RouterLink>
+      <RouterLink to="/adminPan">Заказ</RouterLink>
     </nav>
     <div>
       <div class="login">
-        <p v-if="isLoggedIn && hasAccess">Добро пожаловать, {{userName}}!</p>
-        <p v-else>...</p>
-        <button @click="toggleLogin">
-          <p v-if="isLoggedIn && hasAccess">Log out</p>
-          <p v-else>Log In</p>
-        </button>
+          <div v-if='auth'>
+            <p> {{userName}}, id: {{id}} </p>
+            <button v-on:click="logout">Log out</button>
+          </div>
+          <div v-else>
+            <p>Зайди чтобы работать</p>
+            <RouterLink to="/login" class="loginButton"> login </RouterLink>
+          </div>
       </div>
     </div>
   </header>
@@ -24,16 +26,23 @@
 <script>
 export default {
   data() {
+    if (this.$store.getters.isAuth){
+      return {
+        auth: this.$store.getters.isAuth,
+        userName: this.$store.state.user.loginUser.userName,
+        id: this.$store.state.user.loginUser.id,
+      }
+    }
     return {
-      isLoggedIn: false,
-      hasAccess: false,
-      userName: 'Фёдор'
-    };
+      auth: this.$store.getters.isAuth,
+      userName: "",
+      id: "",
+    }
   },
   methods: {
-    toggleLogin() {
-      this.isLoggedIn = !this.isLoggedIn;
-      this.hasAccess = !this.hasAccess; // Для тестирования
+    logout() {
+      this.$store.commit("logout");
+      this.$router.push({ path: '/login' })
     }
   }
 };
@@ -47,8 +56,10 @@ export default {
   float: right;
 }
 
-.login button{
+.loginButton{
   float: right;
+  color: #181818;
+  font-size: 15px;
 }
 .header {
   border-bottom: #181818 1px solid;
