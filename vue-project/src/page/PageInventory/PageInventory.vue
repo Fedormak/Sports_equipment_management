@@ -2,54 +2,47 @@
 </script>
 
 <template>
-  <div class="deck">
-
-    <div class="card-item">
-      <img />
-      <p>name</p>
-      <p>type</p>
-      <p>count</p>
+  <div>
+    <div v-for="element in articles" class="card-item">
+      <div>
+        <p class="nameP">Id: {{ element.id }}</p>  
+        <p class="nameP">Type: {{ element.type }}</p>
+        <p class="nameP">Name: {{ element.name }}</p>
+        <p class="nameP">{{ element.count }}</p>
+      </div>
     </div>
-    <div class="card-item">
-      <img />
-      <p>name</p>
-      <p>type</p>
-      <p>count</p>
-    </div>
-
   </div>
 </template>
 
 <script>
-new Vue({
-  el: '#app',
+export default {
+  data() {
 
-  data: {
-    item1:[12, 10, 9, 5, 6, 4],
-  },
-
-  methods:{
-    myFunction: function () {
-      n = this.item1.map(this.testFunction);
-    },
-    testFunction: function(num) {
-      return num*this.myModel;
+    return {
+      itemsPerRow: 3,
+      articles: this.$store.getters.inventory
     }
-  }
-
-});
+  },
+}
 </script>
 
 
 <style>
+.nameP{
+  word-break: break-all;
+}
+
 .deck{
   display: inline-block;
 }
 .card-item{
   display: inline-block;
-  margin: 0 5px 0 5px ;
+  vertical-align: top;
+  margin-top: 2px ;
+  margin-left: 2px;
   background-color: darkgray;
-  width: 130px;
+  border: 1px solid black;
+  width: 140px;
   height: 200px;
 }
 </style>

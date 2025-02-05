@@ -214,7 +214,9 @@ const moduleInventory = {
         ]
     }),
     getters: {
-        inventory: state => state.data,
+        inventory(state) {
+            return state.inventory
+        },
     },
 
 }
