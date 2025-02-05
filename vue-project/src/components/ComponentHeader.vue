@@ -4,9 +4,17 @@
 <template>
   <header class="header">
     <nav class="header-page">
-      <RouterLink to="/">Главная</RouterLink>
-      <RouterLink to="/about">Склад</RouterLink>
-      <RouterLink to="/adminPan">Заказ</RouterLink>
+      <div>
+        <RouterLink to="/">Главная</RouterLink>
+          <RouterLink to="/inventory">Инвентарь</RouterLink>
+        <RouterLink to="/applications">Заявки</RouterLink>
+      </div>
+      <div >
+        <RouterLink to="/replacement">Замена</RouterLink>
+        <RouterLink to="/purchases" v-if="auth">Закупки</RouterLink>
+        <RouterLink to="/reports" v-if="auth">Отчёты</RouterLink>
+      </div>
+
     </nav>
     <div>
       <div class="login">

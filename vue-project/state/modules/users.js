@@ -1,7 +1,13 @@
 const moduleUsers = {
     state: () => ({
-        isAuthenticated: false,
-        loginUser: {},
+        isAuthenticated: true,
+        loginUser: {
+            id: 1,
+            userName: "JohnDoe",
+            userLogin: "johndoe",
+            password: "12345",
+            permission: "admin"
+        },
         users:  [
             {
                 id: 1,
@@ -62,7 +68,6 @@ const moduleUsers = {
     }),
     getters: {
         isAuth (state) {
-            console.log(state.isAuthenticated)
             return state.isAuthenticated
         }
     },

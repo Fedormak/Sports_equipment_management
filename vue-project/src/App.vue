@@ -13,12 +13,12 @@ import ComponentHeader from "@/components/ComponentHeader.vue";
 
 <script lang="ts">
 
-import HomePage from "@/page/HomePage.vue";
+import PageHome from "@/page/PageHome.vue";
 import LoginPage from "@/components/ComponentLogin.vue"
 
 export default {
   components: {
-    HomePage,
+    HomePage: PageHome,
     LoginPage,
   },
   computed: {

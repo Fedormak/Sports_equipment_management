@@ -3,7 +3,7 @@
 
 <template>
   <main>
-    <h3>sdf</h3>
+    <h1>Привет</h1>
   </main>
 </template>
 

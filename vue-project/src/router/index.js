@@ -1,19 +1,66 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomePage from '../page/HomePage.vue'
+import PageHome from '../page/PageHome.vue'
 import ComponentLogin from "./../components/ComponentLogin.vue"
-import moduleUsers from "../../state/modules/users.js";
+import store from './../../state/store.js'
+import PageInventory from "../page/PageInventory/PageInventory.vue"
+import PageApplications from "@/page/PageApplications.vue";
+import PageReplacement from "@/page/PageReplacement.vue";
+import PagePurchases from "@/page/PagePurchases.vue";
+import PageReports from "@/page/PageReports.vue";
+
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  store: store,
+  history: createWebHistory(),
   routes: [
     {
       path: '/',
       alias: '/home',
       name: 'home',
-      component: HomePage,
+      component: PageHome,
       meta: {
         layout: 'MainLayout'
       },
+    },
+    {
+      path: '/inventory',
+      name: 'inventory',
+      component: PageInventory,
+      meta: {
+        layout: 'MainLayout'
+      }
+    },
+    {
+      path: '/applications',
+      name: 'applications',
+      component: PageApplications,
+      meta: {
+        layout: 'MainLayout'
+      }
+    },
+    {
+      path: '/replacement',
+      name: 'replacement',
+      component: PageReplacement,
+      meta: {
+        layout: 'MainLayout'
+      }
+    },
+    {
+      path: '/purchases',
+      name: 'purchases',
+      component: PagePurchases,
+      meta: {
+        layout: 'MainLayout'
+      }
+    },
+    {
+      path: '/reports',
+      name: 'reports',
+      component: PageReports,
+      meta: {
+        layout: 'MainLayout'
+      }
     },
     {
       path: '/login',
@@ -24,20 +71,18 @@ const router = createRouter({
   ],
 })
 
-let userlog = moduleUsers.getters.isAuth
+let isAuthenticated = store.getters.isAuth
+
 
 router.beforeEach((to, from, next) => {
-  if (to.name && to.path) {
 
     // если пользователь не авторизован и мы переходим на любую страницу кроме "login" и "registration",
     // то перенаправлять нас на страницу "login"
-    console.log(userlog, "sdasad")
-    if (!userlog && !["login"].includes(to.name)) {
+    if (!store.getters.isAuth && !["login"].includes(to.name)) {
       router.replace({name: 'login'});
       return;
     }
     next();
-  }
 });
 
 export default router
