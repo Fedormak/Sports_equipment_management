@@ -7,6 +7,7 @@ import PageApplications from "@/page/PageApplications.vue";
 import PageReplacement from "@/page/PageReplacement.vue";
 import PagePurchases from "@/page/PagePurchases.vue";
 import PageReports from "@/page/PageReports.vue";
+import itemMore from '../page/PageInventory/modulePageInventory/itemMore.vue'
 
 
 const router = createRouter({
@@ -26,9 +27,16 @@ const router = createRouter({
       path: '/inventory',
       name: 'inventory',
       component: PageInventory,
+      props: true,
       meta: {
         layout: 'MainLayout'
       }
+    },
+    {
+      name: "Item",
+      path: '/inventory/:idInventory',
+      component: itemMore,
+      props: true  
     },
     {
       path: '/applications',

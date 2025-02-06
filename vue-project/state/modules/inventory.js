@@ -219,22 +219,27 @@ const moduleInventory = {
         inventory(state) {
             return state.inventory
         },
+        takeEqupmentById: (state) => (idInventory) =>{
+
+            const Equpment = state.inventory.find(i => i.id === idInventory);
+            
+            return Equpment
+        }
     },
-    mutation: {
+    mutations: {
         createNewEquipment(state, name, type, count) {
             var NewEquipment = Object()
             NewEquipment.id = Object.keys(state.inventory).length++
             NewEquipment.name = name
             NewEquipment.type = type
-            NewEquipment.count = count
             NewEquipment.status = "новый"
         },
         searchEqupment(state, name){
-            const user = state.inventory.find(eq => eq.name  === name);
-            return user
-        }
-    }
-
+            const eq = state.inventory.find(eq => eq.name  === name);
+            return eq
+        },
+        
+    },
 }
 
 export default moduleInventory;

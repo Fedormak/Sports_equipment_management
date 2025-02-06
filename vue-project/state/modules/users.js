@@ -13,7 +13,7 @@ const moduleUsers = {
                 userName: "JohnDoe",
                 userLogin: "johndoe",
                 password: "12345",
-                inventory: {},
+                inventory: [],
                 permission: "admin"
             },
             {
@@ -21,7 +21,7 @@ const moduleUsers = {
                 userName: "JaneSmith",
                 userLogin: "janesmith",
                 password: "abcde",
-                inventory: {},
+                inventory: [],
                 permission: "user"
             },
             {
@@ -29,7 +29,7 @@ const moduleUsers = {
                 userName: "MikeBrown",
                 userLogin: "mikebrown",
                 password: "qwert",
-                inventory: {},
+                inventory: [],
                 permission: "user"
             },
             {
@@ -37,7 +37,7 @@ const moduleUsers = {
                 userName: "EmilyWhite",
                 userLogin: "emilywhite",
                 password: "zxcvb",
-                inventory: {},
+                inventory: [],
                 permission: "admin"
             },
             {
@@ -45,7 +45,7 @@ const moduleUsers = {
                 userName: "ChrisGreen",
                 userLogin: "chrisgreen",
                 password: "asdfg",
-                inventory: {},
+                inventory: [],
                 permission: "user"
             },
             {
@@ -53,7 +53,15 @@ const moduleUsers = {
                 userName: "SarahBlack",
                 userLogin: "sarahblack",
                 password: "123ab",
-                inventory: {},
+                inventory: [
+                    {
+                        id: 2,
+                        name: "Футбольные бутсы",
+                        type: "футбол",
+                        count: 15,
+                        status: "используемый"
+                    }
+                ],
                 permission: "user"
             },
             {
@@ -61,7 +69,15 @@ const moduleUsers = {
                 userName: "DavidBlue",
                 userLogin: "davidblue",
                 password: "pass1",
-                inventory: {},
+                inventory: [
+                    {
+                        id: 2,
+                        name: "Футбольные бутсы",
+                        type: "футбол",
+                        count: 15,
+                        status: "используемый"
+                    }
+                ],
                 permission: "admin"
             },
             {
@@ -69,7 +85,7 @@ const moduleUsers = {
                 userName: "LauraGray",
                 userLogin: "lauragray",
                 password: "hello",
-                inventory: {},
+                inventory: [],
                 permission: "user"
             }]
     }),
@@ -83,7 +99,18 @@ const moduleUsers = {
                 return state.loginUser.permission
             }
             return null
-            
+        },
+        getInventory: (state) => (user_id) => {
+            const user = state.users.find(user => user.id === user_id);
+            return user.inventory
+        },
+        getUsersWithPin: (state) => (id) => {
+            return state.users.filter(user => {
+                return Object.values(user.inventory).some(item => item.id === id);
+            });
+        },
+        isAuthmm (state) {
+            return state.isAuthenticated
         }
     },
     mutations: {
@@ -101,17 +128,14 @@ const moduleUsers = {
             state.loginUser = {}
             console.log("logout")
         },
-        getInventory(state, user_id){
-            const user = state.users.find(user => user.id === user_id);
-            return user.inventory
-        },
-        getUsersHaveName(state, name) {
-            const users = state.users.find(user => user.inventory.find(stuf => stuf.name == name))
-            return users
-        },
-        isAuthmm (state) {
-            return state.isAuthenticated
+        pinToUserEqupment (state, date){
+            const user = state.users.find(user => user.id === date[1]);
+            console.log(user)
+            user.inventory.push(date[0])
+            console.log(user.inventory)
+            
         }
+        
     }
 }
 
