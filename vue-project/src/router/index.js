@@ -71,11 +71,8 @@ const router = createRouter({
   ],
 })
 
-let isAuthenticated = store.getters.isAuth
 
-
-router.beforeEach((to, from, next) => {
-
+router.beforeEach((to, from, next) => { 
     // если пользователь не авторизован и мы переходим на любую страницу кроме "login" и "registration",
     // то перенаправлять нас на страницу "login"
     if (!store.getters.isAuth && !["login"].includes(to.name)) {

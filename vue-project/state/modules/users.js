@@ -1,11 +1,10 @@
 const moduleUsers = {
     state: () => ({
-        isAuthenticated: true,
         loginUser: {
-            id: 1,
-            userName: "JohnDoe",
-            userLogin: "johndoe",
-            password: "12345",
+            id: 4,
+            userName: "EmilyWhite",
+            userLogin: "emilywhite",
+            password: "zxcvb",
             permission: "admin"
         },
         users:  [
@@ -14,6 +13,7 @@ const moduleUsers = {
                 userName: "JohnDoe",
                 userLogin: "johndoe",
                 password: "12345",
+                inventory: {},
                 permission: "admin"
             },
             {
@@ -21,6 +21,7 @@ const moduleUsers = {
                 userName: "JaneSmith",
                 userLogin: "janesmith",
                 password: "abcde",
+                inventory: {},
                 permission: "user"
             },
             {
@@ -28,6 +29,7 @@ const moduleUsers = {
                 userName: "MikeBrown",
                 userLogin: "mikebrown",
                 password: "qwert",
+                inventory: {},
                 permission: "user"
             },
             {
@@ -35,6 +37,7 @@ const moduleUsers = {
                 userName: "EmilyWhite",
                 userLogin: "emilywhite",
                 password: "zxcvb",
+                inventory: {},
                 permission: "admin"
             },
             {
@@ -42,6 +45,7 @@ const moduleUsers = {
                 userName: "ChrisGreen",
                 userLogin: "chrisgreen",
                 password: "asdfg",
+                inventory: {},
                 permission: "user"
             },
             {
@@ -49,6 +53,7 @@ const moduleUsers = {
                 userName: "SarahBlack",
                 userLogin: "sarahblack",
                 password: "123ab",
+                inventory: {},
                 permission: "user"
             },
             {
@@ -56,6 +61,7 @@ const moduleUsers = {
                 userName: "DavidBlue",
                 userLogin: "davidblue",
                 password: "pass1",
+                inventory: {},
                 permission: "admin"
             },
             {
@@ -63,12 +69,21 @@ const moduleUsers = {
                 userName: "LauraGray",
                 userLogin: "lauragray",
                 password: "hello",
+                inventory: {},
                 permission: "user"
             }]
     }),
     getters: {
         isAuth (state) {
-            return state.isAuthenticated
+            let n = Object.keys(state.loginUser).length
+            return n > 0
+        },
+        isStatus (state) {
+            if (state.loginUser > 0) {
+                return state.loginUser.permission
+            }
+            return null
+            
         }
     },
     mutations: {
@@ -84,7 +99,15 @@ const moduleUsers = {
         logout (state) {
             state.isAuthenticated = false
             state.loginUser = {}
-            console.log("fff")
+            console.log("logout")
+        },
+        getInventory(state, user_id){
+            const user = state.users.find(user => user.id === user_id);
+            return user.inventory
+        },
+        getUsersHaveName(state, name) {
+            const users = state.users.find(user => user.inventory.find(stuf => stuf.name == name))
+            return users
         },
         isAuthmm (state) {
             return state.isAuthenticated

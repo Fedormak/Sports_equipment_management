@@ -1,3 +1,5 @@
+import moduleUsers from "./users"
+
 const moduleInventory = {
     state: () => ({
         inventory: [
@@ -218,6 +220,20 @@ const moduleInventory = {
             return state.inventory
         },
     },
+    mutation: {
+        createNewEquipment(state, name, type, count) {
+            var NewEquipment = Object()
+            NewEquipment.id = Object.keys(state.inventory).length++
+            NewEquipment.name = name
+            NewEquipment.type = type
+            NewEquipment.count = count
+            NewEquipment.status = "новый"
+        },
+        searchEqupment(state, name){
+            const user = state.inventory.find(eq => eq.name  === name);
+            return user
+        }
+    }
 
 }
 

@@ -3,46 +3,35 @@
 
 <template>
   <div>
-    <div v-for="element in articles" class="card-item">
-      <div>
-        <p class="nameP">Id: {{ element.id }}</p>  
-        <p class="nameP">Type: {{ element.type }}</p>
-        <p class="nameP">Name: {{ element.name }}</p>
-        <p class="nameP">{{ element.count }}</p>
+    <div>
+      <h1 v-if="hoverdIndex">fdsasdfds</h1>
+      <div v-if="auth" v-for="(element, index) in articles" class="card-item" >  
+        <item :element="{element}" :index="{index, hoverdIndex}"/>
       </div>
+      
     </div>
+    
   </div>
 </template>
 
 <script>
+import item from './modulePageInventory/item.vue'
 export default {
-  data() {
-
-    return {
-      itemsPerRow: 3,
-      articles: this.$store.getters.inventory
-    }
-  },
+    data() {
+        return {
+            hoverdIndex: false,
+            articles: this.$store.getters.inventory,
+            auth: this.$store.getters.isAuth,
+            itemsPerRow: 3,
+            articles: this.$store.getters.inventory
+        };
+    },
+    hoverdIndex: false,
+    components: { item }
 }
 </script>
 
 
 <style>
-.nameP{
-  word-break: break-all;
-}
 
-.deck{
-  display: inline-block;
-}
-.card-item{
-  display: inline-block;
-  vertical-align: top;
-  margin-top: 2px ;
-  margin-left: 2px;
-  background-color: darkgray;
-  border: 1px solid black;
-  width: 140px;
-  height: 200px;
-}
 </style>
