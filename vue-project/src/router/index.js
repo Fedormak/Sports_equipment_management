@@ -4,10 +4,11 @@ import ComponentLogin from "./../components/ComponentLogin.vue"
 import store from './../../state/store.js'
 import PageInventory from "../page/PageInventory/PageInventory.vue"
 import PageApplications from "@/page/PageApplications.vue";
-import PageReplacement from "@/page/PageReplacement.vue";
+import PageReplacement from "@/page/Replacement/PageReplacement.vue";
 import PagePurchases from "@/page/PagePurchases.vue";
 import PageReports from "@/page/PageReports.vue";
 import itemMore from '../page/PageInventory/modulePageInventory/itemMore.vue'
+import itemNew from '../page/PageInventory/modulePageInventory/itemNew.vue'
 
 
 const router = createRouter({
@@ -27,6 +28,15 @@ const router = createRouter({
       path: '/inventory',
       name: 'inventory',
       component: PageInventory,
+      props: true,
+      meta: {
+        layout: 'MainLayout'
+      }
+    },
+    {
+      path: "/inventory/createElement",
+      name: "addNewinventory",
+      component: itemNew,
       props: true,
       meta: {
         layout: 'MainLayout'

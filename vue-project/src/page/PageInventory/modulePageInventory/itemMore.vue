@@ -4,18 +4,20 @@
 <template>
     <div class="content">
         <div class="discription">
-            описания
-            <img />
-            <ul>
-                <li><h2>Имя: {{ Equpment.name }}</h2></li>
-                <li><h2>тип: {{ Equpment.type }}</h2></li>
-                <li><h2>Id: {{ Equpment.id }}</h2></li>
-                <li><h2>{{ Equpment.status }}</h2></li>
+            <img class="img"/>
+            <ul class="dateofEqupment">
+                <h3>
+                <li>Имя: <p contenteditable @input="onInputM" >{{ name }}</p></li>
+                <li>тип: <p contenteditable @input="onInputT" >{{ type }}</p></li>
+                <li>Status: <p contenteditable @input="onInputS" >{{ status }}</p></li>
+                <li>Id: {{ id }}</li>
+                </h3>
             </ul>
+            <button v-on:click="changeStateEqupment">to date</button>
         </div>
         <div class="user">
             <div>
-                <p>Закрпить на:</p>
+                <p>Закрпить за пользователем:</p>
                 <textarea type="text" v-model="userPinId" placeholder="user id" />
                 <button v-on:click="pined">Tap!</button>
             </div>
@@ -37,9 +39,16 @@ export default {
 	data() {
 		let idInventory = this.$router.currentRoute.value.params.idInventory
         let Equpment = this.$store.getters.takeEqupmentById(parseInt(idInventory))
+        
         return {
-            userPinId: "",
+            message: "",
             Equpment: Equpment,
+            Change: false,
+            userPinId: "",
+            name: Equpment.name,
+            type: Equpment.type,
+            status: Equpment.status,
+            id: Equpment.id,
             Pined: this.$store.getters.getUsersWithPin(Equpment.id),
         };
     },
@@ -48,7 +57,15 @@ export default {
             console.log(parseInt(this.userPinId))
             let date = [this.Equpment, parseInt(this.userPinId)]
             this.$store.commit("pinToUserEqupment", date)
-            this.Pined = this.$store.getters.getUsersWithPin(this.Equpment.id)
+            this.Pined = this.$store.getters.getUsersWithPin(this.id)
+        },
+        onInputT(e) {this.type = e.target.innerText},
+        onInputM(e) {this.name = e.target.innerText},
+        onInputS(e) {this.status = e.target.innerText},
+        changeStateEqupment() {
+            
+            this.$store.commit("updateEquipment", {
+                type: this.type, name: this.name, status: this.status, id: this.id})
         }
     }
 }
@@ -56,12 +73,21 @@ export default {
 </script>
 
 <style>
+.img {
+    background-color: hotpink;
+    width: 250px;
+    height: 250px;
+}
+.dateofEqupment{
+    display: inline-block;
+}
 .content{
     display: grid;
+
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 .discription{
-    display: block;
+    display: inline;
 }
 .user {
     display: block

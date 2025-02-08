@@ -3,8 +3,8 @@
 
 <template>
   <div>
+    <RouterLink to="/inventory/createElement" >Add new element</RouterLink>
     <div>
-      <h1 v-if="chooseElement !== null">{{  }}</h1>
       <div v-if="auth" v-for="(element, index) in articles" class="card-item" >
         <item :element="{element}" :index="{index, hoverdIndex, chooseElement}"/>
       </div>
@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import { RouterLink } from 'vue-router';
 import item from './modulePageInventory/item.vue'
 export default {
     data() {
@@ -28,7 +29,7 @@ export default {
         };
     },
     hoverdIndex: false,
-    components: { item }
+    components: { item, RouterLink }
 }
 </script>
 

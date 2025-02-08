@@ -94,11 +94,11 @@ const moduleUsers = {
             let n = Object.keys(state.loginUser).length
             return n > 0
         },
-        isStatus (state) {
-            if (state.loginUser > 0) {
-                return state.loginUser.permission
+        isAdmin (state) {
+            if (Object.keys(state.loginUser).length > 0 && state.loginUser.permission === "admin") {
+                return true
             }
-            return null
+            return false
         },
         getInventory: (state) => (user_id) => {
             const user = state.users.find(user => user.id === user_id);
@@ -130,9 +130,7 @@ const moduleUsers = {
         },
         pinToUserEqupment (state, date){
             const user = state.users.find(user => user.id === date[1]);
-            console.log(user)
             user.inventory.push(date[0])
-            console.log(user.inventory)
             
         }
         
