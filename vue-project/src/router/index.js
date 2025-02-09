@@ -52,6 +52,7 @@ const router = createRouter({
       path: '/applications',
       name: 'applications',
       component: PageApplications,
+      props: true,
       meta: {
         layout: 'MainLayout'
       }

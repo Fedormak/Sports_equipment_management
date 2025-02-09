@@ -19,6 +19,7 @@ import { RouterLink } from 'vue-router';
 import item from './modulePageInventory/item.vue'
 export default {
     data() {
+        console.log(this.$store.getters.inventory)
         return {
             chooseElement: null,
             hoverdIndex: false,
