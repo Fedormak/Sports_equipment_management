@@ -1,8 +1,8 @@
 import store from "./../store"
 
 const modulereplacement = {
-    state: () => ({
-        replacement: [
+  state: () => ({
+    replacement: [
             {
                 id: 1,
                 name: "Порванный мяч",
@@ -68,7 +68,7 @@ const modulereplacement = {
                 idCreater: 1
               },
         ]
-    }),
+      }),
     getters: {
       getAllticket(state) {
             return state.replacement

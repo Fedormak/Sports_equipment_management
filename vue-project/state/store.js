@@ -1,8 +1,8 @@
 import {createStore} from "vuex";
-import users from "./modules/users.js";
 import moduleUsers from "./modules/users.js";
 import moduleInventory from "./modules/inventory.js";
 import modulereplacement from "./modules/replacement.js"
+import moduleApplication from "./modules/application.js"
 
 
 const store = createStore({
@@ -10,6 +10,7 @@ const store = createStore({
         user: moduleUsers,
         inventory: moduleInventory,
         replacement: modulereplacement,
+        application: moduleApplication,
     }
 })
 

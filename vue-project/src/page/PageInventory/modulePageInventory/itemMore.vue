@@ -54,7 +54,6 @@ export default {
     },
     methods:{
         pined() {
-            console.log(parseInt(this.userPinId))
             let date = [this.Equpment, parseInt(this.userPinId)]
             this.$store.commit("pinToUserEqupment", date)
             this.Pined = this.$store.getters.getUsersWithPin(this.id)

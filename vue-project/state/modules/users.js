@@ -5,6 +5,7 @@ const moduleUsers = {
             userName: "EmilyWhite",
             userLogin: "emilywhite",
             password: "zxcvb",
+            breakdown_complaints: [],
             application: [],
             inventory: [],
             permission: "admin"
@@ -15,7 +16,8 @@ const moduleUsers = {
                 userName: "JohnDoe",
                 userLogin: "johndoe",
                 password: "12345",
-                application: [
+                application: [],
+                breakdown_complaints: [
                     {
                     id: 8,
                     name: "Сломанный тренажёр",
@@ -33,7 +35,8 @@ const moduleUsers = {
                 userName: "JaneSmith",
                 userLogin: "janesmith",
                 password: "abcde",
-                application: [
+                application: [],
+                breakdown_complaints: [
                     {
                         id: 4,
                         name: "Сломанный обруч",
@@ -51,7 +54,8 @@ const moduleUsers = {
                 userName: "MikeBrown",
                 userLogin: "mikebrown",
                 password: "qwert",
-                application: [{
+                application: [],
+                breakdown_complaints: [{
                     id: 1,
                     name: "Порванный мяч",
                     description: "Мяч для футбола порвался во время игры.",
@@ -67,7 +71,8 @@ const moduleUsers = {
                 userName: "EmilyWhite",
                 userLogin: "emilywhite",
                 password: "zxcvb",
-                application: [
+                application: [],
+                breakdown_complaints: [
                     {
                         id: 6,
                         name: "Порванные перчатки",
@@ -85,7 +90,8 @@ const moduleUsers = {
                 userName: "ChrisGreen",
                 userLogin: "chrisgreen",
                 password: "asdfg",
-                application: [
+                application: [],
+                breakdown_complaints: [
                     {
                     id: 5,
                     name: "Сломанный шлем",
@@ -111,7 +117,8 @@ const moduleUsers = {
                 userName: "SarahBlack",
                 userLogin: "sarahblack",
                 password: "123ab",
-                application: [
+                application: [],
+                breakdown_complaints: [
                     {
                         id: 7,
                         name: "Сломанный велосипед",
@@ -137,7 +144,8 @@ const moduleUsers = {
                 userName: "DavidBlue",
                 userLogin: "davidblue",
                 password: "pass1",
-                application: [{
+                application: [],
+                breakdown_complaints: [{
                     id: 3,
                     name: "Порванная сетка",
                     description: "Сетка для волейбола порвалась в центре.",
@@ -162,6 +170,7 @@ const moduleUsers = {
                 userLogin: "lauragray",
                 password: "hello",
                 application: [],
+                breakdown_complaints: [],
                 inventory: [],
                 permission: "user"
             }]
@@ -187,9 +196,14 @@ const moduleUsers = {
             const user = state.users.find(user => user.id === user_id);
             return user.inventory
         },
+        getUserApplication: (state) => (user_id) => {
+            const user = state.users.find(user => user.id === user_id);
+            
+            return user.application
+        },
         getUserTicket: (state) => (id) =>{
             let user = state.users.find(i => i.id === id)
-            return Object.values(user.application)
+            return Object.values(user.breakdown_complaints)
         },
         getUsersWithPin: (state) => (id) => {
             return state.users.filter(user => {
@@ -219,7 +233,7 @@ const moduleUsers = {
             console.log(date)
             const user = state.user.find(user => user.id === date[1])
 
-            user.application.push(data[0])
+            user.breakdown_complaints.push(data[0])
         },
         pinToUserEqupment (state, date){
             const user = state.users.find(user => user.id === date[1]);
