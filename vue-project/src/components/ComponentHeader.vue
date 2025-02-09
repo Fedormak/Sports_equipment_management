@@ -37,13 +37,13 @@ export default {
     if (this.$store.getters.isAuth){
       return {
         auth: this.$store.getters.isAuth,
-        userName: this.$store.state.user.loginUser.userName,
-        id: this.$store.state.user.loginUser.id,
+        userName: this.$store.getters.getUser.login_,
+        id: this.$store.getters.getUser.user_id
       }
     }
     return {
       auth: this.$store.getters.isAuth,
-      userName: "",
+      userName: "saf",
       id: "",
     }
   },

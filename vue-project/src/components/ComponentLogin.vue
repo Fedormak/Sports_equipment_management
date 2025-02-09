@@ -13,7 +13,6 @@
       </div>
       <button v-on:click="loginPush">Login</button>
     </div>
-    <h1>{{ $store.state.user.isAuthenticated }}</h1>
     <div>
       <h3>Введенная информация</h3>
       <p>Логин: {{login}}</p>
@@ -35,7 +34,11 @@ export default {
   methods: {
     loginPush(){
       this.$store.commit('login', {login: this.login, password: this.password});
-      this.$router.replace({name: 'home'});
+      this.$store.dispatch("fetchData")
+      setTimeout(()=>{
+        this.$router.replace({name: 'home'})
+      }, 2000)
+      ;
     }
   }
 }
