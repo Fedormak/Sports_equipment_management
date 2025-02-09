@@ -5,8 +5,17 @@ const moduleUsers = {
             userName: "EmilyWhite",
             userLogin: "emilywhite",
             password: "zxcvb",
-            breakdown_complaints: [],
             application: [],
+            breakdown_complaints: [
+                {
+                    id: 6,
+                    name: "Порванные перчатки",
+                    description: "Перчатки для бокса порвались на швах.",
+                    status: "В процессе ремонта",
+                    idEquipment: 6,
+                    idCreater: 4
+                  },
+            ],
             inventory: [],
             permission: "admin"
         },

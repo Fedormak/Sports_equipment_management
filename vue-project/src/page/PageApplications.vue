@@ -55,10 +55,8 @@ export default {
       })
     },
     doneApplication(id) {
-      this.$store.commit("doneApplication", {
-        id_items: this.id_item,
-        id_user: this.idUser
-      } )
+      this.$store.commit("doneApplication", {id: id,id_items: this.id_item,id_user: this.idUser})
+      this.allApplication = this.$store.getters.getAllApplication
     }
   }
 }
