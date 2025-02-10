@@ -1,4 +1,5 @@
 import instance from "./../axios.js"
+import axios from 'axios';
 
 const moduleUsers = {
     state: () => ({
@@ -41,7 +42,7 @@ const moduleUsers = {
 
     },
     mutations: {
-        login (state, datefromVue) {
+        dataWritter (state, datefromVue) {
 
             state.loginWriteUser = datefromVue.login
             state.passwordWriteUser = datefromVue.password
@@ -70,18 +71,30 @@ const moduleUsers = {
         
     },
     actions: {
-        async fetchData({ state, commit }) {
+        async login({ state, commit }) {
             try {
-              const response = await instance.get('/auto_user', { params:{
-                login_: state.loginWriteUser,
-                password_: state.passwordWriteUser,
-              }
-              });
+                console.log(state.loginWriteUser, state.passwordWriteUser)
+                const response = await instance.get('/auto_user', { params:{
+                    login_: state.loginWriteUser,
+                    password_: state.passwordWriteUser,
+                }});
                commit("SET_DATA_USER", response.data)
             } catch (error) {
               console.error('Ошибка при загрузке данных:', error);
             }
-          },
+        },
+        async register({ commit, state }) {
+            try {
+                const response = await instance.post('/reg_user ', {
+                    username_: state.loginWriteUser,
+                    password_: state.passwordWriteUser
+                });
+
+            } catch (error) {
+
+                console.error('reg failed:', error);
+            }
+        }
     }
 }
 

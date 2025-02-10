@@ -36,8 +36,8 @@ export default {
 			    hoverdIndex: props.index.hoverdIndex,
 			    // index: props.index,s
           type: props.element.element.type,
-          name: props.element.element.name,
-			    id: props.element.element.id,
+          name: props.element.element.name_item,
+			    id: props.element.element.item_id,
           articles: this.$store.getters.inventory
         };
     }
