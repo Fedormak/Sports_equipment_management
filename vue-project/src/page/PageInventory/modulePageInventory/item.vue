@@ -4,22 +4,20 @@
 <template>
   <div >
     <div v-if="isAdmin">
-      <RouterLink :to="{ path: '/inventory/' + id}" class="routerlink" >
-	    <div @mouseover="hoverdIndex = true" @mouseleave="hoverdIndex = false">
+      <RouterLink :to="{ path: '/inventory/' + element.item_id}" class="routerlink" >
+	    <div>
 	    	<div >
-	        	<h2 class="nameP">{{ name }}</h2>
-				    <h3 class="nameP">{{ type }}</h3>
-            <h2 class="nameP">id: {{ id }}</h2>
+          <h2> {{element.name_item}} </h2>
+	        	<h2>{{element.item_id}}</h2>
 			  </div>
 	    </div>
 	  </RouterLink>
     </div>
     <div v-else>
-      <div @mouseover="hoverdIndex = true" @mouseleave="hoverdIndex = false">
+      <div >
 	    	<div >
-	        	<h2 class="nameP">{{ name }}</h2>
-				    <h3 class="nameP">{{ type }}</h3>
-            <h2 class="nameP"> id: {{ id }}</h2>
+          <h2> {{element.name_item}} </h2>
+          <h2>{{element.item_id}}</h2>
 			  </div>
 	    </div>
     </div>
@@ -28,17 +26,12 @@
 
 <script>
 export default {
-	props:['element', 'index'],
+	props:['element'],
 	data(props) {
         return {
           isAdmin: this.$store.getters.isAdmin,
-			    chooseElement: props.index.chooseElement,
-			    hoverdIndex: props.index.hoverdIndex,
 			    // index: props.index,s
-          type: props.element.element.type,
-          name: props.element.element.name,
-			    id: props.element.element.id,
-          articles: this.$store.getters.inventory
+          element: props.element.element,
         };
     }
 }

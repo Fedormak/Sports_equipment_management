@@ -5,11 +5,12 @@
 <template>
   <div>
     <div v-if="isAdmin">
+      <h1>Заявки:</h1>
       <ul>
         <li v-for="element in allApplication">
           {{element.name}}, {{element.discription}}, {{element.idItems}}, {{element.idUser}}
-          <button v-on:click="doneApplication(element.id)">Yes</button>
-          <button v-on:click="">No</button>
+          <button v-on:click="null">Yes</button>
+          <button v-on:click="null">No</button>
         </li>
       </ul>
     </div>
@@ -17,8 +18,7 @@
 
     <div v-else >
       <div>
-        <input v-model="name" type="text" placeholder="название предмета на получение">
-        <input v-model="discription" type="text" placeholder="опишите засем вам">
+        <input v-model="commit" type="text" placeholder="опишите засем вам">
         <input v-model="id_item" type="text" placeholder="Id предмета">
         <button v-on:click="CreateApplication"> создать заявку</button>
       </div>
@@ -34,28 +34,24 @@
 <script> 
 export default {
   data() {
-    let id = this.$store.getters.getUserId
       return {
         name: "",
-        discription: "",
-        id_item: "",
-        ApplicationUser: this.$store.getters.getUserApplication(id),
-        idUser: id,
+        commit: "",
+        item_id: "",
         isAdmin: this.$store.getters.isAdmin,
-        allApplication: this.$store.getters.getAllApplication,
+        allApplication: this.$store.getters.getAllticket,
+        ApplicationUser: this.$store.getters.getApplicationUser
+
       }
   },
   methods: {
     CreateApplication() {
-      this.$store.commit("createApplication", {
-        discription: this.discription,
-        name: this.name,
-        id_items: this.id_item,
-        id_user: this.idUser
-      })
+      this.$store.commit("repairDataToCreateNewApplication", {commet: this.commit, item_id: Number(this.item_id)})
+      this.$store.dispatch("createApplication")
+
     },
-    doneApplication(id) {
-      this.$store.commit("doneApplication", {id: id,id_items: this.id_item,id_user: this.idUser})
+    doneApplication() {
+      this.$store.commit("repairDataToCreateNewApplication", {commit: this.commit, item_id: this.item_id, id_user: this.idUser})
       this.allApplication = this.$store.getters.getAllApplication
     }
   }

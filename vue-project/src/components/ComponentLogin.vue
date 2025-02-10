@@ -12,6 +12,7 @@
         <textarea type="text" v-model="password" placeholder="password"/>
       </div>
       <button v-on:click="loginPush">Login</button>
+      <RouterLink to="/register">Регистрация</RouterLink>
     </div>
     <div>
       <h3>Введенная информация</h3>
@@ -33,9 +34,12 @@ export default {
   },
   methods: {
     loginPush(){
-      this.$store.commit('login', {login: this.login, password: this.password});
-      this.$store.dispatch("fetchData")
+      this.$store.commit('dataForAuth', {login: this.login, password: this.password});
+      this.$store.dispatch("login")
       setTimeout(()=>{
+        this.$store.dispatch("getAllTicket")
+        this.$store.dispatch("getAllPlanBuy")
+        this.$store.dispatch("getReplacment")
         this.$router.replace({name: 'home'})
       }, 2000)
       ;

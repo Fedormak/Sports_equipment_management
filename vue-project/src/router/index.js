@@ -5,8 +5,9 @@ import store from './../../state/store.js'
 import PageInventory from "../page/PageInventory/PageInventory.vue"
 import PageApplications from "@/page/PageApplications.vue";
 import PageReplacement from "@/page/Replacement/PageReplacement.vue";
-import PagePurchases from "@/page/PagePurchases.vue";
+import PagePurchases from "@/page/modulePurchases/PagePurchases.vue";
 import PageReports from "@/page/PageReports.vue";
+import ComponentRegister from "./../components/ComponentRegister.vue"
 import itemMore from '../page/PageInventory/modulePageInventory/itemMore.vue'
 import itemNew from '../page/PageInventory/modulePageInventory/itemNew.vue'
 
@@ -87,15 +88,20 @@ const router = createRouter({
       component: ComponentLogin,
       meta: { layout: 'LoginPage' },
     },
+    {
+      path: '/register',
+      name: "register",
+      component: ComponentRegister,
+      meta: { layout: 'RegisterPage' },
+    },
   ],
 })
 
 
-router.beforeEach((to, from, next) => { 
-    console.log(store.getters.isAuth)
+router.beforeEach((to, from, next) => {
     // если пользователь не авторизован и мы переходим на любую страницу кроме "login" и "registration",
     // то перенаправлять нас на страницу "login"
-    if (!store.getters.isAuth && !["login"].includes(to.name)) {
+    if (!store.getters.isAuth && !["login", "register"].includes(to.name)) {
       router.replace({name: 'login'});
       return;
     }

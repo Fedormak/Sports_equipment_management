@@ -3,6 +3,7 @@ import moduleUsers from "./modules/users.js";
 import moduleInventory from "./modules/inventory.js";
 import modulereplacement from "./modules/replacement.js"
 import moduleApplication from "./modules/application.js"
+import modulePlanBuy from "./modules/plunbuy.js";
 
 
 const store = createStore({
@@ -11,6 +12,7 @@ const store = createStore({
         inventory: moduleInventory,
         replacement: modulereplacement,
         application: moduleApplication,
+        planBuy: modulePlanBuy,
     }
 })
 

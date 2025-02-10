@@ -8,14 +8,13 @@
             <ul class="dateofEqupment">
                 <h3>
                 <li>Имя: <p contenteditable @input="onInputM" >{{ name }}</p></li>
-                <li>тип: <p contenteditable @input="onInputT" >{{ type }}</p></li>
                 <li>Status: <p contenteditable @input="onInputS" >{{ status }}</p></li>
                 <li>Id: {{ id }}</li>
                 </h3>
             </ul>
             <button v-on:click="changeStateEqupment">to date</button>
         </div>
-        <div class="user">
+        <!-- <div class="user">
             <div>
                 <p>Закрпить за пользователем:</p>
                 <textarea type="text" v-model="userPinId" placeholder="user id" />
@@ -29,7 +28,7 @@
             </ul>
             <p></p>
             <h3> users</h3>
-        </div>
+        </div> -->
         
     </div>
 </template>
@@ -38,18 +37,18 @@
 export default {
 	data() {
 		let idInventory = this.$router.currentRoute.value.params.idInventory
-        let Equpment = this.$store.getters.takeEqupmentById(parseInt(idInventory))
-        
+        let Equpment = this.$store.getters.takeEqupmentById(idInventory)
+        console.log(Equpment)
+
         return {
             message: "",
             Equpment: Equpment,
             Change: false,
             userPinId: "",
-            name: Equpment.name,
-            type: Equpment.type,
+            name: Equpment.name_item,
             status: Equpment.status,
-            id: Equpment.id,
-            Pined: this.$store.getters.getUsersWithPin(Equpment.id),
+            id: Equpment.item_id,
+            // Pined: this.$store.getters.getUsersWithPin(Equpment.id),
         };
     },
     methods:{
@@ -58,13 +57,16 @@ export default {
             this.$store.commit("pinToUserEqupment", date)
             this.Pined = this.$store.getters.getUsersWithPin(this.id)
         },
-        onInputT(e) {this.type = e.target.innerText},
         onInputM(e) {this.name = e.target.innerText},
         onInputS(e) {this.status = e.target.innerText},
         changeStateEqupment() {
             
             this.$store.commit("updateEquipment", {
-                type: this.type, name: this.name, status: this.status, id: this.id})
+                name_item: this.name,
+                item_id: this.id,
+                status: this.status
+            })
+            this.$store.dispatch("UpdateEquipment")
         }
     }
 }

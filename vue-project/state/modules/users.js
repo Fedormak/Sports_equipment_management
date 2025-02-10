@@ -14,34 +14,30 @@ const moduleUsers = {
             return state.userInSys
         },
         isAdmin (state) {
-            if (state.userInSys.permission === "admin") {
+            if (state.userInSys.permission_ === "admin") {
                 return true
             }
             return false
         },
-        getInventory: (state) => (user_id) => {
-            const user = state.users.find(user => user.id === user_id);
-            return user.inventory
-        },
-        getUserApplication: (state) => (user_id) => {
-            const user = state.users.find(user => user.id === user_id);
+        // getInventory: (state) => (user_id) => {
+        //     const user = state.users.find(user => user.id === user_id);
+        //     return user.inventory
+        // },
+        // getUserApplication: (state) => (user_id) => {
+        //     const user = state.users.find(user => user.id === user_id);
             
-            return user.application
-        },
-        getUserTicket: (state) => (id) =>{
-            let user = state.users.find(i => i.id === id)
-            return Object.values(user.breakdown_complaints)
-        },
-        getUsersWithPin: (state) => (id) => {
-            return state.users.filter(user => {
-                return Object.values(user.inventory).some(item => item.id === id);
-            });
-        },
+        //     return user.application
+        // },
+        // getUsersWithPin: (state) => (id) => {
+        //     return state.users.filter(user => {
+        //         return Object.values(user.inventory).some(item => item.id === id);
+        //     });
+        // },
 
 
     },
     mutations: {
-        login (state, datefromVue) {
+        dataForAuth (state, datefromVue) {
 
             state.loginWriteUser = datefromVue.login
             state.passwordWriteUser = datefromVue.password
@@ -70,18 +66,27 @@ const moduleUsers = {
         
     },
     actions: {
-        async fetchData({ state, commit }) {
+        async login({ state, commit }) {
             try {
-              const response = await instance.get('/auto_user', { params:{
+              const response = await instance.post('/auto_user', {
                 login_: state.loginWriteUser,
                 password_: state.passwordWriteUser,
-              }
               });
                commit("SET_DATA_USER", response.data)
             } catch (error) {
               console.error('Ошибка при загрузке данных:', error);
             }
           },
+        async register({state}) {
+            try {
+                const respons = await instance.post('/reg_user ', {
+                    login_: state.loginWriteUser,
+                    password_: state.passwordWriteUser
+                })
+            } catch (error) {
+                console.error("Ошибка при регистрации:", error)
+            }
+        }
     }
 }
 

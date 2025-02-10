@@ -15,10 +15,12 @@ import ComponentHeader from "@/components/ComponentHeader.vue";
 
 import PageHome from "@/page/PageHome.vue";
 import LoginPage from "@/components/ComponentLogin.vue"
+import ComponentRegister from './components/ComponentRegister.vue';
 
 export default {
   components: {
     HomePage: PageHome,
+    RegisterPage: ComponentRegister,
     LoginPage,
   },
   computed: {

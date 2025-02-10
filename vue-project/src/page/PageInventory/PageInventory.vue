@@ -3,10 +3,10 @@
 
 <template>
   <div>
-    <RouterLink to="/inventory/createElement" >Add new element</RouterLink>
+    <RouterLink to="/inventory/createElement" v-if="isAdmin" >Add new element</RouterLink>
     <div>
-      <div v-if="auth" v-for="(element, index) in articles" class="card-item" >
-        <item :element="{element}" :index="{index, hoverdIndex, chooseElement}"/>
+      <div v-if="auth" v-for="element in articles" class="card-item" >
+        <item :element="{element}"/>
       </div>
       
     </div>
@@ -19,11 +19,10 @@ import { RouterLink } from 'vue-router';
 import item from './modulePageInventory/item.vue'
 export default {
     data() {
-        console.log(this.$store.getters.inventory)
         return {
+            isAdmin: this.$store.getters.isAdmin,
             chooseElement: null,
             hoverdIndex: false,
-            articles: this.$store.getters.inventory,
             auth: this.$store.getters.isAuth,
             itemsPerRow: 3,
             articles: this.$store.getters.inventory
@@ -31,8 +30,9 @@ export default {
     },
     hoverdIndex: false,
     components: { item, RouterLink }
+    // =)
 }
-</script>
+</script> 
 
 
 <style>

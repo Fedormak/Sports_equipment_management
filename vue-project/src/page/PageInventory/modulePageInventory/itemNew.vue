@@ -5,13 +5,18 @@
     <div>
         <ul class="dateofEqupment">
                 <h3>
-                    <li>Имя: <p contenteditable @input="onInputM" ></p></li>
-                    <li>тип: <p contenteditable @input="onInputT" ></p></li>
-                    <li>Status: <p contenteditable @input="onInputS" ></p></li>
-                    <li>Id: {{ Id }}</li>
+                    <li>Имя: <p сlass="input" contenteditable @input="onInputM" ></p></li>
+                    <li>Количество: <p сlass="input" contenteditable @input="onInputS" ></p></li>
                 </h3>
+                <button v-on:click="createNewEquipment">Create</button>
         </ul>
-        <button v-on:click="createNewEquipment">Create</button>
+        <ul v-if="dataNewEqBool">
+            <h2> вы создали:</h2>
+            <li v-for="elem in dataNewEq">
+                <h4>{{ elem.name_item }}, {{ elem.status }}, {{ elem.item_id }}</h4>
+
+            </li>
+        </ul>
     </div>
 </template>
 
@@ -19,20 +24,28 @@
 export default {
     data() {
         return {
-            type: "",
             name: "",
-            status: "",
-            Id: this.$store.getters.iflenghtUsers + 1,
+            count: "",
+            dataNewEqBool: false,
+            dataNewEq: this.$store.getters.getDataOfNewEqupment
         };
     },
     methods: {
-        onInputT(e) {this.type = e.target.innerText},
         onInputM(e) {this.name = e.target.innerText},
-        onInputS(e) {this.status = e.target.innerText},
+        onInputS(e) {this.count = e.target.innerText},
         createNewEquipment() {
-            this.$store.commit("createNewEquipment", {type: this.type, name: this.name, status: this.status, id: this.Id})
-            this.Id = this.Id + 1
+            this.$store.commit("createNewEquipment", {count: this.count, name: this.name})
+            this.$store.dispatch("NewEqupment")
+            this.dataNewEqBool = true
+            setTimeout(()=>{this.dataNewEq = this.$store.getters.getDataOfNewEqupment}, 500)
+            
         }
     }
 }
 </script>
+
+<style>
+.input{
+    border: 1px black solid
+} 
+</style>
