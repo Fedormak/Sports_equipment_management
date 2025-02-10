@@ -4,6 +4,7 @@ import moduleInventory from "./modules/inventory.js";
 import modulereplacement from "./modules/replacement.js"
 import moduleApplication from "./modules/application.js"
 import modulePlanBuy from "./modules/plunbuy.js";
+import modulelogs from "./modules/logs.js"
 
 
 const store = createStore({
@@ -13,6 +14,7 @@ const store = createStore({
         replacement: modulereplacement,
         application: moduleApplication,
         planBuy: modulePlanBuy,
+        logi: modulelogs,
     }
 })
 

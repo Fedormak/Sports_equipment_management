@@ -8,9 +8,9 @@
       <h1>Заявки:</h1>
       <ul>
         <li v-for="element in allApplication">
-          {{element.name}}, {{element.discription}}, {{element.idItems}}, {{element.idUser}}
-          <button v-on:click="null">Yes</button>
-          <button v-on:click="null">No</button>
+          {{element.req_id}} - {{element.comment}} id предмета:{{element.item_id}} - запросил: {{element.user_id}}
+          <button v-on:click="doneApplication(element.user_id, element.req_id, element.item_id)">Yes</button>
+          <button v-on:click="UnDoneApplication(element.req_id)">No</button>
         </li>
       </ul>
     </div>
@@ -18,15 +18,10 @@
 
     <div v-else >
       <div>
-        <input v-model="commit" type="text" placeholder="опишите засем вам">
-        <input v-model="id_item" type="text" placeholder="Id предмета">
+        <input v-model="commit" type="text" placeholder="опишите зачем вам">
+        <input v-model="item_id" type="text" placeholder="Id предмета">
         <button v-on:click="CreateApplication"> создать заявку</button>
       </div>
-      <ul>
-        <li v-for="element in ApplicationUser">
-          {{ element }}
-        </li>
-      </ul>
     </div>
   </div>
 </template>
@@ -39,7 +34,7 @@ export default {
         commit: "",
         item_id: "",
         isAdmin: this.$store.getters.isAdmin,
-        allApplication: this.$store.getters.getAllticket,
+        allApplication: this.$store.getters.getAllApplication,
         ApplicationUser: this.$store.getters.getApplicationUser
 
       }
@@ -50,9 +45,21 @@ export default {
       this.$store.dispatch("createApplication")
 
     },
-    doneApplication() {
-      this.$store.commit("repairDataToCreateNewApplication", {commit: this.commit, item_id: this.item_id, id_user: this.idUser})
-      this.allApplication = this.$store.getters.getAllApplication
+    doneApplication(user_id,req_id, item_id) {
+      console.log(user_id,req_id, item_id)
+      this.$store.dispatch("doneApplication", {user_id:user_id ,req_id:req_id, item_id:item_id, })
+      
+      setTimeout(()=>{
+        this.allApplication = this.$store.getters.getAllApplication
+      }, 1000)
+    },
+    UnDoneApplication(req_id) {
+      this.$store.dispatch("unDoneApplication", {req_id: req_id})
+      this.$store.dispatch("getReplacment")
+
+      setTimeout(()=>{
+        this.allApplication = this.$store.getters.getAllApplication
+      }, 1000)
     }
   }
 }

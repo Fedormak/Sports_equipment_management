@@ -48,8 +48,6 @@ const moduleInventory = {
                 const respons = await instance.get("/items")
 
                 state.inventory = respons.data
-
-                console.log(state.inventory)
             } catch (error) {
                 console.error("Ошибка в получении тикетов: ", error)
             }
@@ -68,8 +66,6 @@ const moduleInventory = {
         async UpdateEquipment({dispatch, state}){
             try {
                 const respons = await instance.put("/reduct_item", state.forUpdateEqupment)
-
-                console.log(respons.data)
 
                 dispatch("getAllTicket")
 

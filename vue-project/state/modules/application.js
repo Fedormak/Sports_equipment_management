@@ -15,7 +15,7 @@ const moduleAplication = {
       dataApplicationOneUser: null,
       }),
       getters: {
-        getAllticket(state) {
+        getAllApplication(state) {
               return state.application
         },
         repairDataToCreateNewApplication:(state, store)=>(data)=>{
@@ -32,12 +32,13 @@ const moduleAplication = {
           state.createNewReplacement.comment = data.commet
           state.createNewReplacement.user_id = store.getters.getUser.user_id
           state.createNewReplacement.item_id = Number(data.item_id)
-        }
+        },
+
       },
       actions: {
         async getReplacment({state}){
           try {
-            const respons = await instance.get("/item")
+            const respons = await instance.get("/all_req")
 
             state.application = respons.data
           }catch (error){
@@ -57,8 +58,27 @@ const moduleAplication = {
           try {
             const respons = await instance.post("/add_request_item", state.createNewReplacement)
             
-            console.log(respons.data)
           } catch(error){
+            console.log(error)
+          }
+        },
+        async doneApplication({state}, data){
+          try {
+            console.log(data)
+            const respons = await instance.post("/item_use", data)
+
+            console.log(respons)
+          } catch(error) {
+            console.log(error)
+          }
+        },
+        async unDoneApplication({state}, data){
+          try {
+            console.log(data)
+            const respons = await instance.delete("/delete_req", data)
+
+            console.log(respons)
+          } catch(error) {
             console.log(error)
           }
         }

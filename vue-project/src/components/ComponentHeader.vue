@@ -10,9 +10,8 @@
         <RouterLink to="/applications">Заявки</RouterLink>
       </div>
       <div >
-        <RouterLink to="/replacement">Замена</RouterLink>
-        <RouterLink to="/purchases" v-if="auth">Закупки</RouterLink>
-        <RouterLink to="/reports" v-if="auth">Отчёты</RouterLink>
+        <RouterLink to="/purchases" v-if="isAdmin">Закупки</RouterLink>
+        <RouterLink to="/reports" v-if="isAdmin">Отчёты</RouterLink>
       </div>
 
     </nav>
@@ -36,13 +35,14 @@ export default {
   data() {
     if (this.$store.getters.isAuth){
       return {
+        isAdmin: this.$store.getters.isAdmin,
         auth: this.$store.getters.isAuth,
         userName: this.$store.getters.getUser.login_,
         id: this.$store.getters.getUser.user_id
       }
     }
     return {
-      auth: this.$store.getters.isAuth,
+      isAdmin: this.$store.getters.isAdmin,
       userName: "saf",
       id: "",
     }
