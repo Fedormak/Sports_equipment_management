@@ -10,8 +10,10 @@
           <h2> {{element.name_item}} </h2>
 	        	<h2>{{element.item_id}}</h2>
 			  </div>
+        
 	    </div>
 	  </RouterLink>
+    <button v-on:click="delIem(element.item_id)">DEl mi</button>
     </div>
     <div v-else>
       <div >
@@ -33,6 +35,12 @@ export default {
 			    // index: props.index,s
           element: props.element.element,
         };
+    },
+    methods: {
+      delIem(item_id) {
+        this.$store.dispatch("delItem", {item_id: Number(item_id)})
+        this.$
+      }
     }
 }
 </script>

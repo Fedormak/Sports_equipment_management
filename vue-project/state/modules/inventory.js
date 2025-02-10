@@ -72,6 +72,13 @@ const moduleInventory = {
             } catch (error) {
                 console.error("Ошибка создания еденицы инветоря", error)
             }
+        },
+        async delItem({state}, data){
+            try{
+                const respons = await instance.delete("/delete_item", data)
+            } catch (erro) {
+                console.error(erro)
+            }
         }
     }
 
