@@ -46,9 +46,9 @@ export default {
 
     },
     doneApplication(user_id,req_id, item_id) {
-      console.log(user_id,req_id, item_id)
       this.$store.dispatch("doneApplication", {user_id:user_id ,req_id:req_id, item_id:item_id, })
-      
+      this.$store.dispatch("getReplacment")
+
       setTimeout(()=>{
         this.allApplication = this.$store.getters.getAllApplication
       }, 1000)
