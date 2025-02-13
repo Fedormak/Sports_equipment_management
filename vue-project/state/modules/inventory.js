@@ -73,9 +73,16 @@ const moduleInventory = {
                 console.error("Ошибка создания еденицы инветоря", error)
             }
         },
-        async delItem({state}, data){
+        async delItem({dispatch}, datas){
             try{
-                const respons = await instance.delete("/delete_item", data)
+                console.log(datas)
+                const respons = await instance.delete("/delete_item", 
+                    {
+                        data: datas // Отправка ID элемента в теле запроса
+                    }
+                )
+
+                dispatch("getAllTicket")
             } catch (erro) {
                 console.error(erro)
             }

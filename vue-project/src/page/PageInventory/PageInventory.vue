@@ -7,6 +7,7 @@
     <div>
       <div v-if="auth" v-for="element in articles" class="card-item" >
         <item :element="{element}"/>
+        <button v-on:click="delIem(element.item_id)">DEl mi</button>
       </div>
       
     </div>
@@ -29,7 +30,16 @@ export default {
         };
     },
     hoverdIndex: false,
-    components: { item, RouterLink }
+    components: { item, RouterLink },
+    methods:{
+      delIem(item_id) {
+        this.$store.dispatch("delItem", {item_id: Number(item_id)})
+        this.$store.dispatch("getAllTicket")
+        setTimeout(()=>{
+          this.articles = this.$store.getters.inventory
+        }, 100)
+      }
+    }
     // =)
 }
 </script> 

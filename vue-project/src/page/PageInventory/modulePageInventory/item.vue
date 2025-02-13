@@ -13,7 +13,6 @@
         
 	    </div>
 	  </RouterLink>
-    <button v-on:click="delIem(element.item_id)">DEl mi</button>
     </div>
     <div v-else>
       <div >
@@ -28,19 +27,14 @@
 
 <script>
 export default {
-	props:['element'],
+  props:["element"],
 	data(props) {
+      console.log(props.func)
         return {
           isAdmin: this.$store.getters.isAdmin,
 			    // index: props.index,s
           element: props.element.element,
         };
-    },
-    methods: {
-      delIem(item_id) {
-        this.$store.dispatch("delItem", {item_id: Number(item_id)})
-        this.$
-      }
     }
 }
 </script>

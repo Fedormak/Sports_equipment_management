@@ -26,6 +26,7 @@ export default {
         loginPush() {
             this.$store.commit("dataForAuth", {login: this.login, password: this.password})
             this.$store.dispatch("register")
+            this.$router.replace({name: 'login'})
         }
     } 
 }
