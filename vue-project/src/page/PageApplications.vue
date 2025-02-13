@@ -17,10 +17,12 @@
 
 
     <div v-else >
-      <div>
-        <input v-model="commit" type="text" placeholder="опишите зачем вам">
-        <input v-model="item_id" type="text" placeholder="Id предмета">
-        <button v-on:click="CreateApplication"> создать заявку</button>
+      <div class="for-form">
+        <div class="form">
+          <input class="input" v-on:keyup.enter="CreateApplication" v-model="commit" type="text" placeholder="опишите зачем вам">
+          <input class="input"  v-on:keyup.enter="CreateApplication" v-model="item_id" type="text" placeholder="Id предмета">
+          <button class="input" v-on:click="CreateApplication"> создать заявку</button>
+        </div>
       </div>
     </div>
   </div>
@@ -31,7 +33,6 @@ export default {
   data() {
       return {
         name: "",
-        commit: "",
         item_id: "",
         isAdmin: this.$store.getters.isAdmin,
         allApplication: this.$store.getters.getAllApplication,
@@ -43,6 +44,9 @@ export default {
     CreateApplication() {
       this.$store.commit("repairDataToCreateNewApplication", {commet: this.commit, item_id: Number(this.item_id)})
       this.$store.dispatch("createApplication")
+
+      this.name = "",
+      this.item_id = ""
 
     },
     doneApplication(user_id,req_id, item_id) {
@@ -67,4 +71,18 @@ export default {
 </script>
 
 <style>
+.form {
+  display: block;
+}
+.for-form{
+  width: 40vh;
+}
+.input{
+  display: block;
+  outline: none;
+  border-radius: 5px;
+  width: 200px;
+  margin-top: 8px;
+}
+
 </style>

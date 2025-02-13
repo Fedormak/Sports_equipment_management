@@ -48,7 +48,6 @@ const moduleUsers = {
 
         },
         addToApplicationElement(state, date){
-            console.log(date)
             const user = state.user.find(user => user.id === date[1])
 
             user.breakdown_complaints.push(data[0])
@@ -59,8 +58,6 @@ const moduleUsers = {
         },
         SET_DATA_USER(state, data){
             state.userInSys = data
-
-            console.log(state.userInSys)
             
         }
         

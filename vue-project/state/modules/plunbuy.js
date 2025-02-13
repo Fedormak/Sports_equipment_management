@@ -11,7 +11,6 @@ const modulePlanBuy = {
     }),
     getters:{
         updateDataPlan:(state) => (data) => {
-            console.log(data)
             state.forNewDataPlan.price = Number(data.price)
             state.forNewDataPlan.name_item = data.name_item
             state.forNewDataPlan.name_provider = data.name_provider
@@ -37,8 +36,6 @@ const modulePlanBuy = {
                 const respons = await instance.get("/output_plan_buy")
 
                 state.planBuy = respons.data
-
-                console.log(state.planBuy)
             } catch(error){
                 console.error("Error: ", error)
             }

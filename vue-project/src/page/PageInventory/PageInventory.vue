@@ -33,11 +33,13 @@ export default {
     components: { item, RouterLink },
     methods:{
       delIem(item_id) {
+        console.log(item_id, "del mw")
         this.$store.dispatch("delItem", {item_id: Number(item_id)})
         this.$store.dispatch("getAllTicket")
         setTimeout(()=>{
+          
           this.articles = this.$store.getters.inventory
-        }, 100)
+        }, 300)
       }
     }
     // =)

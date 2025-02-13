@@ -66,8 +66,6 @@ const moduleAplication = {
           try {
             console.log(data)
             const respons = await instance.post("/item_use", data)
-
-            console.log(respons)
           } catch(error) {
             console.log(error)
           }
@@ -77,8 +75,6 @@ const moduleAplication = {
             const respons = await instance.delete("/delete_req", {
               data: datas // Отправка ID элемента в теле запроса
             })
-
-            console.log(respons)
           } catch(error) {
             console.log(error)
           }

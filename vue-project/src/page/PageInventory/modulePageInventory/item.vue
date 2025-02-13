@@ -7,8 +7,8 @@
       <RouterLink :to="{ path: '/inventory/' + element.item_id}" class="routerlink" >
 	    <div>
 	    	<div >
-          <h2> {{element.name_item}} </h2>
-	        	<h2>{{element.item_id}}</h2>
+          <h2> {{elementsd.name_item}} </h2>
+	        	<h2>{{elementsd.item_id}}</h2>
 			  </div>
         
 	    </div>
@@ -17,8 +17,8 @@
     <div v-else>
       <div >
 	    	<div >
-          <h2> {{element.name_item}} </h2>
-          <h2>{{element.item_id}}</h2>
+          <h2> {{elementsd.name_item}} </h2>
+          <h2>{{elementsd.item_id}}</h2>
 			  </div>
 	    </div>
     </div>
@@ -29,11 +29,10 @@
 export default {
   props:["element"],
 	data(props) {
-      console.log(props.func)
         return {
           isAdmin: this.$store.getters.isAdmin,
 			    // index: props.index,s
-          element: props.element.element,
+          elementsd: this.element.element,
         };
     }
 }

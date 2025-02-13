@@ -37,9 +37,6 @@ export default {
       this.$store.commit('dataForAuth', {login: this.login, password: this.password});
       this.$store.dispatch("login")
       setTimeout(()=>{
-        this.$store.dispatch("getAllTicket")
-        this.$store.dispatch("getAllPlanBuy")
-        this.$store.dispatch("getReplacment")
         this.$router.replace({name: 'home'})
       }, 2000)
       ;
