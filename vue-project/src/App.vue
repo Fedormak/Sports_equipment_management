@@ -6,7 +6,9 @@ import ComponentHeader from "@/components/ComponentHeader.vue";
 <template>
   <component :is="currentLayout">
     <ComponentHeader />
-    <router-view />
+    <div class="content">
+      <router-view />
+    </div>
   </component>
 </template>
 
@@ -30,3 +32,9 @@ export default {
   },
 };
 </script>
+
+<style>
+.content{
+  margin-top: 10px;
+}
+</style>

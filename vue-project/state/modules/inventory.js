@@ -73,6 +73,15 @@ const moduleInventory = {
                 console.error("Ошибка создания еденицы инветоря", error)
             }
         },
+        async getAllEqupmentByOneUser({state}, data){
+            try {
+                const respons = await instance.post("/status_item", data)
+
+                return respons.data
+            } catch(error){ 
+                console.error("Ошибка создания еденицы инветоря", error)
+            }
+        },
         async delItem({dispatch}, datas){
             try{
                 console.log(datas)

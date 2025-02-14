@@ -38,7 +38,6 @@ export default {
 	data() {
 		let idInventory = this.$router.currentRoute.value.params.idInventory
         let Equpment = this.$store.getters.takeEqupmentById(idInventory)
-        console.log(Equpment)
 
         return {
             message: "",

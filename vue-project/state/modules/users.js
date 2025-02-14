@@ -14,7 +14,7 @@ const moduleUsers = {
             return state.userInSys
         },
         isAdmin (state) {
-            if (state.userInSys.permission_ === "admin") {
+            if (state.userInSys !== null && state.userInSys.permission_ === "admin") {
                 return true
             }
             return false
@@ -41,6 +41,7 @@ const moduleUsers = {
 
             state.loginWriteUser = datefromVue.login
             state.passwordWriteUser = datefromVue.password
+
         },
         
         logout (state) {
@@ -70,8 +71,10 @@ const moduleUsers = {
                 password_: state.passwordWriteUser,
               });
                commit("SET_DATA_USER", response.data)
+               return true
             } catch (error) {
               console.error('Ошибка при загрузке данных:', error);
+              return false
             }
           },
         async register({state}) {

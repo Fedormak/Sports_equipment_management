@@ -4,11 +4,11 @@
 <template>
   <div >
     <div v-if="isAdmin">
-      <RouterLink :to="{ path: '/inventory/' + element.item_id}" class="routerlink" >
+      <RouterLink :to="{ path: '/inventory/' + elementsd.item_id}" class="routerlink" >
 	    <div>
-	    	<div >
+	    	<div class="content-item">
           <h2> {{elementsd.name_item}} </h2>
-	        	<h2>{{elementsd.item_id}}</h2>
+	        <h2>{{elementsd.item_id}}</h2>
 			  </div>
         
 	    </div>
@@ -16,7 +16,7 @@
     </div>
     <div v-else>
       <div >
-	    	<div >
+	    	<div class="content-item">
           <h2> {{elementsd.name_item}} </h2>
           <h2>{{elementsd.item_id}}</h2>
 			  </div>
@@ -60,12 +60,12 @@ export default {
   width: 100%;
   height: 100%;
   vertical-align: top;
-  margin-top: 2px ;
-  margin-left: 2px;
+  margin-left: 8px;
   background-color: aquamarine;
   border: 1px solid black;
+  border-radius: 10px;
   width: 240px;
   height: 230px;
-  
+  text-align: center;
 }
 </style>

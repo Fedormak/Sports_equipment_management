@@ -2,12 +2,14 @@
 </script>
 
 <template>
-  <div>
+  <div >
     <RouterLink to="/inventory/createElement" v-if="isAdmin" >Add new element</RouterLink>
     <div>
-      <div v-if="auth" v-for="element in articles" class="card-item" >
+      <div v-for="element in articles" class="card-item" :key="element.item_id" 
+       @mouseover="upHere = element.item_id" 
+       @mouseleave="upHere = null" >
         <item :element="{element}"/>
-        <button v-on:click="delIem(element.item_id)">DEl mi</button>
+        <button  v-if="element.item_id === upHere && isAdmin" v-on:click="delIem(element.item_id)">del</button>
       </div>
       
     </div>
@@ -21,15 +23,15 @@ import item from './modulePageInventory/item.vue'
 export default {
     data() {
         return {
+            upHere: null,
             isAdmin: this.$store.getters.isAdmin,
             chooseElement: null,
             hoverdIndex: false,
-            auth: this.$store.getters.isAuth,
             itemsPerRow: 3,
-            articles: this.$store.getters.inventory
+            articles: this.$store.getters.inventory,
+            hoveredItem: null
         };
     },
-    hoverdIndex: false,
     components: { item, RouterLink },
     methods:{
       delIem(item_id) {
@@ -40,6 +42,12 @@ export default {
           
           this.articles = this.$store.getters.inventory
         }, 300)
+      },
+      handleMouseOver(item) {
+      this.hoveredItem = item;
+      },
+      handleMouseLeave(item) {
+        this.hoveredItem = null;
       }
     }
     // =)

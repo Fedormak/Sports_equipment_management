@@ -3,22 +3,18 @@
 </script>
 
 <template>
-  <div>
-    <RouterLink to="/">Главная</RouterLink>
+  <div class="loginfon">
     <div class="loginForm">
-      <h3>Login In</h3>
+      <h2>Вход в систему</h2>
       <div class="container">
-        <textarea type="text" v-model="login" placeholder="login"/>
-        <textarea type="text" v-model="password" placeholder="password"/>
+        <textarea type="text" v-model="login" placeholder="Логин"/>
+        <textarea type="text" v-model="password" placeholder="Пароль"/>
       </div>
-      <button v-on:click="loginPush">Login</button>
-      <RouterLink to="/register">Регистрация</RouterLink>
+      <button v-on:click="loginPush">Войти</button>
+      <RouterLink to="/register">Нет аккаунта?</RouterLink>
     </div>
-    <div>
-      <h3>Введенная информация</h3>
-      <p>Логин: {{login}}</p>
-      <p>Пароль: {{password}}</p>
-
+    <div v-if="!islogin" class="Error">
+      <h2>Неверный пароль или логин. Попробуйте ещё раз</h2>
     </div>
 
   </div>
@@ -28,6 +24,7 @@
 export default {
   data() {
     return {
+      islogin:true,
       login:'',
       password:'',
     }
@@ -35,7 +32,18 @@ export default {
   methods: {
     loginPush(){
       this.$store.commit('dataForAuth', {login: this.login, password: this.password});
+      this.login = '',
+      this.password = ''
       this.$store.dispatch("login")
+      setTimeout(() => {
+        console.log(this.$store.getters.isAuth)
+        if (!this.$store.getters.isAuth){
+          this.islogin = false 
+        } else {
+          this.islogin = true 
+        }
+      }, 100)
+
       setTimeout(()=>{
         this.$router.replace({name: 'home'})
       }, 2000)
@@ -49,10 +57,13 @@ export default {
 textarea {
   resize: none;
 }
+.Error {
+  color: red;
+}
 
 .loginForm {
   width: 400px;
-  height: 400px;
+  height: 100%;
   margin: 0 auto;
   text-align: center;
 }

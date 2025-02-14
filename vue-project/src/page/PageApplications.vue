@@ -19,8 +19,8 @@
     <div v-else >
       <div class="for-form">
         <div class="form">
-          <input class="input" v-on:keyup.enter="CreateApplication" v-model="commit" type="text" placeholder="опишите зачем вам">
-          <input class="input"  v-on:keyup.enter="CreateApplication" v-model="item_id" type="text" placeholder="Id предмета">
+          <textarea class="input" v-on:keyup.enter="CreateApplication" v-model="commit" type="text" placeholder="опишите зачем вам" />
+          <textarea class="input"  v-on:keyup.enter="CreateApplication" v-model="item_id" type="text" placeholder="Id предмета" />
           <button class="input" v-on:click="CreateApplication"> создать заявку</button>
         </div>
       </div>
@@ -32,7 +32,7 @@
 export default {
   data() {
       return {
-        name: "",
+        commit: "",
         item_id: "",
         isAdmin: this.$store.getters.isAdmin,
         allApplication: this.$store.getters.getAllApplication,

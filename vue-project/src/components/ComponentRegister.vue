@@ -3,14 +3,14 @@
 
 <template>
 
-    <RouterLink to="/">Вернуться</RouterLink>
-    <div class="loginForm">
-      <h3>Login In</h3>
-      <div class="container">
-        <textarea type="text" v-model="login" placeholder="login"/>
-        <textarea type="text" v-model="password" placeholder="password"/>
-      </div>
-      <button v-on:click="loginPush">Login</button>
+  <div class="loginForm">
+    <h2>Заригестрироваться</h2>
+    <div class="container">
+      <textarea type="text" v-model="login" placeholder="логин"/>
+      <textarea type="text" v-model="password" placeholder="пароль"/>
+    </div>
+    <button v-on:click="loginPush">Создать</button>
+    <RouterLink to="/">Есть аккаунт?</RouterLink>
     </div>
 </template>
 
