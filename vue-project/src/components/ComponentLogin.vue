@@ -35,14 +35,9 @@ export default {
       this.login = '',
       this.password = ''
       this.$store.dispatch("login")
-      setTimeout(() => {
-        console.log(this.$store.getters.isAuth)
-        if (!this.$store.getters.isAuth){
-          this.islogin = false 
-        } else {
-          this.islogin = true 
-        }
-      }, 100)
+      setTimeout(() => {console.log(
+        this.$store.getters.isAuth)
+        this.islogin = this.$store.getters.isAuth}, 200)
 
       setTimeout(()=>{
         this.$router.replace({name: 'home'})
